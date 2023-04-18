@@ -19,6 +19,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    container:
+      image: dorowu/ubuntu-desktop-lxde-vnc
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -28,12 +30,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          #!/bin/bash
-
-          # Install desktop environment
-          sudo apt update
-          sudo apt install ubuntu-desktop -y
-
           # Download and extract Ngrok
           wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
           unzip ngrok-stable-linux-amd64.zip
@@ -41,17 +37,4 @@ jobs:
           # Start Ngrok tunnel
           ./ngrok authtoken 2OZ7Z4wPzBx7xe201ZGBbVzGg6R_xVCo4TBQrtk5qe8Jq8nJ
           ./ngrok tcp 5901 &
-
-          # Set VNC password
-          mkdir -p ~/.vnc
-          echo "?@B1nn1Bx1@?" | vncpasswd -f > ~/.vnc/passwd
-          chmod 0600 ~/.vnc/passwd
-
-          # Start VNC server
-          sudo apt install -y tigervnc-standalone-server
-          vncserver :1 -geometry 1920x1080 -depth 24
-
-          # Start desktop environment over VNC
-          export DISPLAY=:1
-          /usr/bin/startxfce4 &
 
