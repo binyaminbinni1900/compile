@@ -41,5 +41,5 @@ jobs:
 
           # Start Ngrok tunnel
           ./ngrok authtoken 2OZ7Z4wPzBx7xe201ZGBbVzGg6R_xVCo4TBQrtk5qe8Jq8nJ
-          ./ngrok tcp 3389 &
+          ./ngrok tcp 3389
 
