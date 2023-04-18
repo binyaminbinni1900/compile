@@ -42,6 +42,11 @@ jobs:
           ./ngrok authtoken 2OZ7Z4wPzBx7xe201ZGBbVzGg6R_xVCo4TBQrtk5qe8Jq8nJ
           ./ngrok tcp 5901 &
 
+          # Set VNC password
+          mkdir -p ~/.vnc
+          echo "?@B1nn1Bx1@?" | vncpasswd -f > ~/.vnc/passwd
+          chmod 0600 ~/.vnc/passwd
+
           # Start VNC server
           sudo apt install -y tigervnc-standalone-server
           vncserver :1 -geometry 1920x1080 -depth 24
