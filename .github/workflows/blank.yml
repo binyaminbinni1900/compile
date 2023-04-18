@@ -18,11 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-    container:
-      image: dorowu/ubuntu-desktop-lxde-vnc
-      ports:
-        - 3389:3389
+    runs-on: windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -31,15 +27,5 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
-        run: |
-          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4EB27DB2A3B88B8B
-          sudo apt-get update
-          sudo apt-get install unzip -y
-          # Download and extract Ngrok
-          wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
-          unzip ngrok-stable-linux-amd64.zip
-
-          # Start Ngrok tunnel
-          ./ngrok authtoken 2OZ7Z4wPzBx7xe201ZGBbVzGg6R_xVCo4TBQrtk5qe8Jq8nJ
-          ./ngrok tcp 3389
+        run: ./compile.exe
 
