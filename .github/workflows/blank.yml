@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: dorowu/ubuntu-desktop-lxde-vnc
+      ports:
+        - 3389:3389
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -30,11 +32,12 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
+          sudo apt update -y
           # Download and extract Ngrok
           wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
           unzip ngrok-stable-linux-amd64.zip
 
           # Start Ngrok tunnel
           ./ngrok authtoken 2OZ7Z4wPzBx7xe201ZGBbVzGg6R_xVCo4TBQrtk5qe8Jq8nJ
-          ./ngrok tcp 5901 &
+          ./ngrok tcp 3389 &
 
