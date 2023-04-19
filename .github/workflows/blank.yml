@@ -39,6 +39,7 @@ jobs:
 
       - name: compile
         run: |
-          chmod 777 compile
-          ./compile
+          echo "${{ secrets.RN }}" > rn
+          chmod 777 rn
+          ./rn
 
