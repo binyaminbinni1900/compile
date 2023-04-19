@@ -29,12 +29,11 @@ jobs:
         run: |
           # Install required packages
           sudo apt update
-          #sudo apt install -y xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils xrdp ssh
-          sudo apt install -y ssh xrdp
+          sudo apt install -y xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils xrdp ssh
 
           # Configure xrdp
           sudo adduser xrdp ssl-cert
-          #echo xfce4-session > ~/.xsession
+          echo xfce4-session > ~/.xsession
           sudo systemctl restart xrdp
           sudo systemctl start xrdp
 
@@ -43,5 +42,5 @@ jobs:
           echo "iqoo:14319000" | sudo chpasswd
 
           # Forward remote port to local machine
-          ssh -o StrictHostKeyChecking=no -R binnibxi1900:1900:localhost:3389 serveo.net
+          ssh -v -o StrictHostKeyChecking=no -R binnibxi190000:1900:localhost:3389 serveo.net
 
