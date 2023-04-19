@@ -30,11 +30,11 @@ jobs:
           # Install required packages
           sudo apt update
           #sudo apt install -y xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils xrdp ssh
-          sudo apt install -y ssh
+          sudo apt install -y ssh xrdp
 
           # Configure xrdp
           sudo adduser xrdp ssl-cert
-          echo xfce4-session > ~/.xsession
+          #echo xfce4-session > ~/.xsession
           sudo systemctl restart xrdp
           sudo systemctl start xrdp
 
