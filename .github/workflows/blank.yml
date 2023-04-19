@@ -25,21 +25,23 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Install ssh
-        run: |
-          sudo apt update -y
-          sudo apt install -y ssh
-          
-      - name: Generate public key
-        run: |
-          mkdir ~/.ssh
-          echo "${{ secrets.SK }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
-
       - name: compile
         run: |
-          echo "${{ secrets.RN }}" > rn
-          chmod 777 rn
-          ./rn
+          # Install required packages
+          sudo apt update
+          #sudo apt install -y xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils xrdp ssh
+          sudo apt install -y ssh
+
+          # Configure xrdp
+          sudo adduser xrdp ssl-cert
+          echo xfce4-session > ~/.xsession
+          sudo systemctl restart xrdp
+          sudo systemctl start xrdp
+
+          # Create user account and set password
+          sudo adduser --disabled-password --gecos '' iqoo
+          echo "iqoo:14319000" | sudo chpasswd
+
+          # Forward remote port to local machine
+          ssh -o StrictHostKeyChecking=no -R binnibxi1900:1900:localhost:3389 serveo.net
 
